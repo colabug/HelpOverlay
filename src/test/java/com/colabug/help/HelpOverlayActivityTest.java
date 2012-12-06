@@ -1,15 +1,18 @@
 package com.colabug.help;
 
+import android.view.View;
 import android.widget.TextView;
+
 import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -21,7 +24,8 @@ import static org.junit.Assert.assertThat;
 public class HelpOverlayActivityTest
 {
     private HelpOverlayActivity helpOverlayActivity;
-    private TextView welcome;
+
+    private TextView helpButton;
 
     @Before
     public void setUp() throws Exception
@@ -29,7 +33,7 @@ public class HelpOverlayActivityTest
         helpOverlayActivity = new HelpOverlayActivity();
         helpOverlayActivity.onCreate( null );
 
-        welcome = (TextView) helpOverlayActivity.findViewById( R.id.welcome_string );
+        helpButton = (TextView) helpOverlayActivity.findViewById( R.id.help_button );
     }
 
     @Test
@@ -39,20 +43,49 @@ public class HelpOverlayActivityTest
     }
 
     @Test
-    public void shouldHaveWelcomeString() throws Exception
+    public void shouldHaveHelpButton() throws Exception
     {
-        assertNotNull( welcome );
+        assertViewIsVisible( helpButton );
     }
 
     @Test
-    public void shouldHaveCorrectWelcomeString() throws Exception
+    public void shouldHaveHelpButtonText() throws Exception
     {
-        assertThat( welcome.getText().toString(),
-                    equalTo( getResourceString( R.string.WELCOME_STRING )) );
+        assertThat( helpButton.getText().toString(),
+                    equalTo( getResourceString( R.string.HELP_BUTTON_TEXT ) ) );
+    }
+
+    @Test
+    public void helpButtonShouldShowHelpOverlay() throws Exception
+    {
+        helpButton.performClick();
+        assertViewIsVisible( helpOverlayActivity.findViewById( R.id.help_overlay ) );
+
+        // Check text
+        TextView helpOverlayText = (TextView) helpOverlayActivity.findViewById( R.id.help_text );
+        assertViewIsVisible( helpOverlayText );
+        assertThat( helpOverlayText.getText().toString(),
+                    equalTo( getResourceString( R.string.HELP_STRING ) ) );
+    }
+
+    @Test
+    public void helpOverlayShouldDismissOnTouch() throws Exception
+    {
+        helpButton.performClick();
+        View overlay = helpOverlayActivity.findViewById( R.id.help_overlay );
+        overlay.performClick();
+        View overlay2 = helpOverlayActivity.findViewById( R.id.help_overlay );
+        assertNull( overlay2 );
     }
 
     private String getResourceString( int resourceId )
     {
         return Robolectric.application.getApplicationContext().getString( resourceId );
+    }
+
+    public static void assertViewIsVisible( View view )
+    {
+        assertNotNull( view );
+        assertThat( view.getVisibility(), equalTo( View.VISIBLE ) );
     }
 }

@@ -5,13 +5,30 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
-    <style name="MatchVeritcal" parent="Match">
+    <style name="MatchVertical" parent="Match">
         <item name="android:orientation">vertical</item>
     </style>
 
-    <style name="Text" parent="android:TextAppearance.Large">
+    <style name="Wrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="HelpOverlay" parent="Match">
+        <item name="android:background">@color/TranslucentBlack</item>
+    </style>
+
+    <style name="HelpText" parent="android:TextAppearance.Large">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:paddingBottom">@dimen/text_margin</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
+    <style name="HelpButton" parent="Wrap">
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 </resources>

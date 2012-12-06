@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:id="@+id/help_overlay"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/HelpOverlay">
+
+    <TextView
+        android:id="@+id/help_text"
+        android:text="@string/HELP_STRING"
+        style="@style/HelpText"/>
+</RelativeLayout>

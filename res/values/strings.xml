@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="APP_NAME">HelpOverlay</string>
-    <string name="WELCOME_STRING">Hello World!</string>
+
+    <!--Help-->
+    <string name="HELP_STRING">Helping you</string>
+    <string name="HELP_BUTTON_TEXT">HELP!</string>
 </resources>
